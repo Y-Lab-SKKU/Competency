@@ -1,3 +1,7 @@
+% This script is used to test whether keyboard input is working correctly.
+% Some newer versions of Psychtoolbox have issues with keyboard detection.
+% Run this script if the avatar does not move in the game to verify keyboard functionality.
+
 KbName('UnifyKeyNames');
 disp('Press any key (ESC to quit).');
 
