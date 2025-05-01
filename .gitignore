@@ -7,6 +7,9 @@ __pycache__/
 # Ignore environment folders
 env/
 venv/
+.venv/
+.conda/
+.vscode/
 
 # Ignore temporary or system files
 *.log
@@ -15,4 +18,4 @@ venv/
 # Ignore the analysis 
 analysis/ 
 data/
-
+pre_generate_data/
