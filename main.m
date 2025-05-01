@@ -1,5 +1,10 @@
 %% MAIN FILE
- 
+
+% This is the entry file for the experiment.
+% Before running this script, please ensure that you have checked and configured 
+% the 'init' function and the options: 'visual_opt', 'game_opt', and 'eye_opt'
+% to make sure the parameters match your system.
+
 [visual_opt, device_opt, game_opt, eye_opt, save_directory] = initalize();
  
 % Define the break structure
