@@ -1,4 +1,4 @@
-function data = concatenate_pos_data(data, avtr_pos, eel_pos, fish_pos, eye_pos, phase_str)
+function data = concatenate_pos_data(data, avtr_pos, eel_pos, fish_pos, eye_pos, joy_vec, phase_str)
     % Convert input strings to valid field names
     phase_str = matlab.lang.makeValidName(phase_str);
 
@@ -22,4 +22,9 @@ function data = concatenate_pos_data(data, avtr_pos, eel_pos, fish_pos, eye_pos,
     
     % Assign eye position data
     data.(phase_str).eye_pos = eye_pos;
+    
+    % Assign joystick vector data if provided
+    if nargin >= 6 && exist('joy_vec', 'var') && ~isempty(joy_vec)
+        data.(phase_str).all_joy_vec = joy_vec;
+    end
 end

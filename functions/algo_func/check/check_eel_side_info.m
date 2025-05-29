@@ -11,6 +11,9 @@ function [left_eel_curr_pos, right_eel_curr_pos, ...
     else
         side = curr_trial_data.eels(1).final_side;
     end
+    
+    side = curr_trial_data.eels(1).final_side;
+
 
     % Assign positions, competencies, and colors based on the side
     if side == 1 % 1 means left

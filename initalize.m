@@ -1,6 +1,3 @@
-% This script initializes configurations, sets paths, and saves metadata 
-% for device, visual, game, and eye-tracking options.
-
 function [visual_opt, device_opt, game_opt, eye_opt, save_directory] = initalize()
 
     %% 0) clear all;

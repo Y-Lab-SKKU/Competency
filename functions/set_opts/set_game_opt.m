@@ -6,7 +6,7 @@ function game_opt = set_game_opt()
     
     
     game_opt.premade_eels = true; % if true we will load the eels and use those 
-    game_opt.eels_src = './pre_generate_data/data/modified_trials_april2';
+    game_opt.eels_src = './pre_generate_data/data/five_comps';
     
     % Updated reliability values - percentage per fish caught
     game_opt.high_reliability = 0.25;  % 25% per fish for high reliability eel
@@ -17,6 +17,7 @@ function game_opt = set_game_opt()
     game_opt.PV_time = 2;               % Time for presenting the visual (seconds)
     game_opt.pursuit_time = 7;          % Duration of pursuit phase (seconds)
     game_opt.choice_time = 10;        	% Time allowed for making a choice (seconds)
+    game_opt.report_time = 15;          % Time allowed for reporting eel state (seconds)
     game_opt.score_time = 1.5;          % Duration for displaying the score (seconds)
     
     %TIME TRACKING Buffer 

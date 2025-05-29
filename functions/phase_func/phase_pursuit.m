@@ -58,6 +58,7 @@ function curr_trial_data = phase_pursuit(curr_trial_data, visual_opt, ...
     all_right_fish_pos = nan * ones(num_steps, game_opt.n_fishes, 2); 
     all_left_fish_pos = nan * ones(num_steps, game_opt.n_fishes, 2); 
     all_avatar_pos = nan * ones(num_steps, 2);
+    all_joy_vec = zeros(num_steps, 2);
 
     all_eye_data(num_steps) = struct('eyeX', [], 'eyeY', [], 'pupSize', []);
 
@@ -81,7 +82,10 @@ function curr_trial_data = phase_pursuit(curr_trial_data, visual_opt, ...
         all_eye_data(t_step).pupSize = eye_data.eyePupSz;
 
         % Update avatar position
-        avtr_future_pos = update_pos_avatar(avtr_curr_pos, device_opt, game_opt.avatar_speed, visual_opt, game_opt);
+        [avtr_future_pos, joy_vec] = update_pos_avatar(avtr_curr_pos, device_opt, game_opt.avatar_speed, visual_opt, game_opt);
+        
+        % Store joystick vector
+        all_joy_vec(t_step, :) = joy_vec;
 
         % Determine current side (1 = LEFT, 2 = RIGHT, other = center)
         side = check_avatar_side(avtr_future_pos(1), visual_opt, game_opt);
@@ -197,7 +201,7 @@ function curr_trial_data = phase_pursuit(curr_trial_data, visual_opt, ...
 
     % Store all position data
     curr_trial_data = concatenate_pos_data(curr_trial_data, all_avatar_pos(1:t_step-1, :), ...
-        all_eels_pos, all_fish_pos, all_eye_data(1:t_step-1), phase_str);
+        all_eels_pos, all_fish_pos, all_eye_data(1:t_step-1), all_joy_vec(1:t_step-1, :), phase_str);
 
     % Store phase timing
     curr_trial_data.(phase_str).phase_end = GetSecs();

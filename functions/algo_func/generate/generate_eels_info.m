@@ -63,15 +63,15 @@ function curr_trial_data = generate_eels_info_generate(curr_trial_data, visual_o
 
     for iE = 1:game_opt.n_eels
         eels(iE).initial_side = sides(iE);
-        eels(iE).final_side = swap_eels * (3 - sides(iE)) + ~swap_eels * sides(iE);
+        %eels(iE).final_side = swap_eels * (3 - sides(iE)) + ~swap_eels * sides(iE);
         eels(iE).eel_col = eel_colors(iE, :);
 
         % Determine horizontal range based on final side
         w_quarter = visual_opt.wWth / 4;
         w_range = [floor(w_quarter - visual_opt.eel_rnd_range), ceil(w_quarter + visual_opt.eel_rnd_range)];
-        if eels(iE).final_side == 2
-            w_range = w_range + visual_opt.wWth / 2;
-        end
+        % if eels(iE).final_side == 2
+        %     w_range = w_range + visual_opt.wWth / 2;
+        % end
 
         % Assign position and generate fish locations
         eels(iE).eel_pos = [randi(w_range), randi(h_range)];
@@ -83,7 +83,7 @@ function curr_trial_data = generate_eels_info_generate(curr_trial_data, visual_o
         eels(iE).comp_change = comp_changes(idx);
         eels(iE).dist_params = dist_info(idx);
         eels(iE).competency = chosen_competencies(idx);
-        eels(iE).final_competency = chosen_competencies(idx) + comp_changes(idx);
+        %eels(iE).final_competency = chosen_competencies(idx) + comp_changes(idx);
         
         % ----- Reliability Assignment -----
         % Build the key based on eel color RGB values

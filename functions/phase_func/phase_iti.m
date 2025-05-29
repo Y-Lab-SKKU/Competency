@@ -62,7 +62,7 @@ function [curr_trial_data, game_opt] = phase_iti(curr_trial_data, visual_opt, ..
 
     %% Final Data Storage and Timing
     % Concatenate the position and eye data information
-    curr_trial_data = concatenate_pos_data(curr_trial_data, -1, -1, -1, all_eye_data, phase_str);
+    curr_trial_data = concatenate_pos_data(curr_trial_data, -1, -1, -1, all_eye_data, -1, phase_str);
     
     % Record the end time of the ITI phase and calculate the duration
     curr_trial_data.(sprintf('%s', phase_str)).phase_end = GetSecs();

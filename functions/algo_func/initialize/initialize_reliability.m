@@ -25,9 +25,12 @@ function [game_opt, all_trials] = initialize_reliability(game_opt, all_trials, v
     
     game_opt.reliability_map = reliability_map;
     
-    % Sample the first swap trial using the normal distribution.
-    % (Assumes game_opt has fields reliability_mu and reliability_sigma.)
-    offset = round(normrnd(game_opt.reliability_mu, game_opt.reliability_sigma));
+    % Generate normally distributed random number using Box-Muller transform
+    u1 = rand();
+    u2 = rand();
+    z = sqrt(-2 * log(u1)) * cos(2 * pi * u2);  % Standard normal distribution
+    offset = round(game_opt.reliability_mu + z * game_opt.reliability_sigma);  % Scale and shift
+    
     game_opt.next_reliability_swap = 1 + offset;
     
     %fprintf('Next swap trial: %d\n', game_opt.next_reliability_swap);

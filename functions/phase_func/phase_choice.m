@@ -17,6 +17,7 @@ function curr_trial_data = phase_choice(curr_trial_data, visual_opt, game_opt, e
     num_steps = round(visual_opt.refresh_rate * game_opt.choice_time);
     all_avatar_pos = -1 * ones(num_steps, 2);
     all_eye_data(num_steps) = struct('eyeX', [], 'eyeY', [], 'pupSize', []);
+    all_joy_vec = zeros(num_steps, 2);
     
     % Initialize choice
     t_step = 1;
@@ -41,11 +42,12 @@ function curr_trial_data = phase_choice(curr_trial_data, visual_opt, game_opt, e
         all_eye_data(t_step).pupilSize = eye_data.eyePupSz;
     
         % Update position based on input
-        avtr_pos = update_pos_avatar(avtr_pos, device_opt, game_opt.avatar_speed, ...
+        [avtr_pos, joy_vec] = update_pos_avatar(avtr_pos, device_opt, game_opt.avatar_speed, ...
             visual_opt, game_opt);
     
-        % Store position
+        % Store position and joystick vector
         all_avatar_pos(t_step, :) = avtr_pos;
+        all_joy_vec(t_step, :) = joy_vec;
     
         % Check for choice based on position
         if avtr_pos(1) < visual_opt.corridor_coord(1, 1)
@@ -74,7 +76,8 @@ function curr_trial_data = phase_choice(curr_trial_data, visual_opt, game_opt, e
     
     
     % Update final data
-    curr_trial_data = concatenate_pos_data(curr_trial_data, all_avatar_pos, -1, -1, all_eye_data, phase_str);
+    curr_trial_data = concatenate_pos_data(curr_trial_data, all_avatar_pos(1:t_step-1, :), ...
+        -1, -1, all_eye_data(1:t_step-1), all_joy_vec(1:t_step-1, :), phase_str);
     
     % save end time
     curr_trial_data.(phase_str).phase_end = GetSecs();
